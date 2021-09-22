@@ -1,15 +1,14 @@
 #Task 04: Collect tree leaves
 def collect_leaves(node):
-    assert isinstance(node, (dict, list))  
+    if not isinstance(node, (dict, list)):
+        raise ValueError("ValueError: Tree structure is broken")
     if type(node) == dict:
         res = []
         for item in node.values():
             res.extend(collect_leaves(item))
         return res
-    elif type(node) == list:
-        return node
     else:
-        return "tree structure is broken" 
+        return node
 
 tree = {
    "node1": {
@@ -36,13 +35,15 @@ broken_tree = {
 tests = [
     [tree, [1, 2, 3, 4, 5, 6, 7, 8, 9]], 
     [[1, 2, 3], [1, 2, 3]], 
-    [broken_tree, "Assertion Error: Tree structure is broken"]
+    [broken_tree, "ValueError: Tree structure is broken"]
     ]
 
 for test in tests:
+    result = False
     try:
         collect_leaves(test[0]) == test[1]
         result = True
-    except AssertionError:
-        result = False     
-    assert result, f"{test[0]}\n{test[1]}"
+    except ValueError as err:
+        if str(err) == test[1]:
+            result = True
+    assert result
