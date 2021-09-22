@@ -1,13 +1,16 @@
 #Task 04: Collect tree leaves
 def collect_leaves(node):
-    assert isinstance(node, (dict, list)), f"tree structure is broken, \nnode={node}\nnode type is {type(node)}\nexpected type: list or dict" 
+    assert isinstance(node, (dict, list))  
     if type(node) == dict:
         res = []
         for item in node.values():
-            res += collect_leaves(item)
+            res.extend(collect_leaves(item))
         return res
-    else:
+    elif type(node) == list:
         return node
+    else:
+        return "tree structure is broken" 
+
 tree = {
    "node1": {
        "node11": {
@@ -30,14 +33,16 @@ broken_tree = {
    "node2": [7, 8, 9]
 }
 
-expected_leaves = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-result = collect_leaves(tree)
-assert result == expected_leaves
+tests = [
+    [tree, [1, 2, 3, 4, 5, 6, 7, 8, 9]], 
+    [[1, 2, 3], [1, 2, 3]], 
+    [broken_tree, "Assertion Error: Tree structure is broken"]
+    ]
 
-expected_leaves = [1, 2, 3]
-result = collect_leaves([1, 2, 3])
-assert result == expected_leaves
-
-expected_leaves = [4, 5, 6, 7, 8, 9]
-result = collect_leaves(broken_tree)
-assert result == expected_leaves
+for test in tests:
+    try:
+        collect_leaves(test[0]) == test[1]
+        result = True
+    except AssertionError:
+        result = False     
+    assert result, f"{test[0]}\n{test[1]}"
