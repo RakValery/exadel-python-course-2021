@@ -1,16 +1,13 @@
 #Task 06: Decorators
-from functools import cache
-
+import time
 def measure_elapsed_time(fn):
-    import time
     def execution_time(*arg, **kwarg):
         start = time.time()
         res = fn(*arg, **kwarg)
         end = time.time()
-        print("Function execution time:{} секунд.".format(end-start))
+        print(f"Function {fn} with arg {arg, kwarg} execution time:{end-start} секунд.")
         return res
     return execution_time
-
 def fib(n: int):
     if type(n) is not int:
         try:
@@ -26,10 +23,12 @@ def fib(n: int):
         return 1
     else:
         return fib(n - 1) + fib(n - 2)
-
-
 @measure_elapsed_time
-def full_ex(n):
+def wait_xsecs(x):
+    time.sleep(x)
+    return f"I waited for {x} sec"
+@measure_elapsed_time
+def fib_ex(n):
     return(fib(n))
-
-print(full_ex(10))
+print(fib_ex(10))
+print(wait_xsecs(8))
