@@ -5,7 +5,7 @@ def measure_elapsed_time(fn):
         start = time.time()
         res = fn(*arg, **kwarg)
         end = time.time()
-        print(f"Function {fn} with arg {arg, kwarg} execution time:{end-start} секунд.")
+        print(f"Function {fn} with arg {arg, kwarg} execution time:{end-start} seconds.")
         return res
     return execution_time
 def fib(n: int):
