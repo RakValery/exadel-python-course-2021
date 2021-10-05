@@ -56,7 +56,7 @@ class OrderRepository:
     def list(self, n_latest: int = None):
         if n_latest == None:
             return self.orders
-        elif (1 > n_latest) or (n_latest > len(self.orders)) or type(n_latest) != int:
+        elif type(n_latest) != int or (1 > n_latest) or (n_latest > len(self.orders)):
             raise ValueError(f"The value {n_latest} must be an integer in the range [1-{len(self.orders)}]")
         else: 
             return self.orders[-n_latest:] # EQ [len(self.orders)-n_latest : len(self.orders)]     [-n_latest:] 
