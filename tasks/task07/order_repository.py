@@ -39,8 +39,8 @@ class Order:
         return False
 
 class OrderRepository:
-    def __init__(self):
-        self.orders = []
+    def __init__(self, orders: list[Order] = []):
+        self.orders = orders
     def __str__(self):
         res = ""
         for iorder in self.orders:
@@ -59,7 +59,7 @@ class OrderRepository:
         elif (1 > n_latest) or (n_latest > len(self.orders)) or type(n_latest) != int:
             raise ValueError(f"The value {n_latest} must be an integer in the range [1-{len(self.orders)}]")
         else: 
-            return self.orders[-n_latest:] # EQ [len(self.orders)-n_latest : len(self.orders)]     [-n_latest :] 
+            return self.orders[-n_latest:] # EQ [len(self.orders)-n_latest : len(self.orders)]     [-n_latest:] 
     def delete(self, order_id):
         for iorder in self.orders:
             if iorder.order_id == order_id:
