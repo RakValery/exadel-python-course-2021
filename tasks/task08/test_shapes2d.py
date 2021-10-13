@@ -58,6 +58,8 @@ class TestShapes2D(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Radius must be Int or Float positive number"):
             Circle(self.point4, "5")        
     def test_init_shapes(self): # OK
+        with self.assertRaisesRegex(ValueError, "Type of Shape2DCollection parameter must be List of Shape2D"):
+            Shape2DCollection(self.point3)
         with self.assertRaisesRegex(ValueError, "Type of collection item must be Shape2D"):
             Shape2DCollection([self.rect, self.point3, self.crcl])
 

@@ -136,6 +136,8 @@ class Shape2DCollection(Shape2D): #Shape2DCollection* - inherits from Shape2D.
         return self._shapes
     @shapes.setter
     def shapes(self, shapes):
+        if type(shapes) != list:
+            raise ValueError(f"Type of Shape2DCollection parameter must be List of Shape2D")
         for shape in shapes:
             if not isinstance(shape, Shape2D):
                 raise ValueError(f"Type of collection item must be Shape2D")
