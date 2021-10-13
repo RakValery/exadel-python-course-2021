@@ -1,6 +1,6 @@
 #tests for Task 08: Class - inheritance, magic methods
 import unittest 
-from shapes2d import Point2D, Shape2D, Rectangle, Circle, Square, Shape2DCollection
+from shapes2d import Point2D, Rectangle, Circle, Square, Shape2DCollection
 
 class TestShapes2D(unittest.TestCase):
     def setUp(self):    #before start    
