@@ -63,7 +63,9 @@ class Rectangle(Shape2D): #Rectangle - inherits from Shape2D. Has arguments like
         return f"Rectangle: bottom_left = {self.bottom_left}, width = {self.width}, length = {self.length}"
 
     def __contains__(self, point: Point2D):
-        if type(point) is Point2D and (self.bottom_left.x <= point.x <= self.bottom_left.x + self.length) and (self.bottom_left.y <= point.y <= self.bottom_left.y + self.width):
+        if type(point) is Point2D and \
+            (self.bottom_left.x <= point.x <= self.bottom_left.x + self.length) and \
+            (self.bottom_left.y <= point.y <= self.bottom_left.y + self.width):
             return True
         else: 
             return False
@@ -79,12 +81,13 @@ class Square(Rectangle): #Square - inherits from Rectangle.
 
     @property
     def side(self):
-        return self._side
+        return self.width
     @side.setter
     def side(self, side):
         if not isinstance(side, (int, float)) or side <= 0:
             raise ValueError("Side must be Int or Float positive number")
-        self._side = side   
+        self.width = side 
+        self.length = side  
 
     def __str__(self):
         return f"Square: bottom_left = {self.bottom_left}, side = {self.side}"
